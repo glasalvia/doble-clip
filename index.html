@@ -49,7 +49,7 @@
 </head>
 <body class="text-brand-dark antialiased">
     <!-- Modal -->
-    <div id="modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4">
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4" onclick="if(event.target==this)closeModal()">
         <div class="bg-white rounded-2xl p-6 max-w-lg w-full relative">
             <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-black">✕</button>
             <div id="modal-content" class="text-center">

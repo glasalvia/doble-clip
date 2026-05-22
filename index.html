@@ -31,9 +31,7 @@
     </script>
     <style>
         body { background-color: #fdf8f5; }
-        html { scroll-behavior: smooth; } /* Desplazamiento suave para los links */
-
-        /* Clases para animaciones delicadas */
+        html { scroll-behavior: smooth; }
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(25px);
@@ -43,13 +41,34 @@
             opacity: 1;
             transform: translateY(0);
         }
-        .delay-100 { transition-delay: 100ms; }
-        .delay-200 { transition-delay: 200ms; }
-        .delay-300 { transition-delay: 300ms; }
-        .delay-400 { transition-delay: 400ms; }
+        /* Modal */
+        #modal { display: none; }
+        #modal.active { display: flex; }
     </style>
 </head>
 <body class="text-brand-dark antialiased">
+    <!-- Modal -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl p-6 max-w-lg w-full relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-black">✕</button>
+            <div id="modal-content" class="text-center">
+                <img id="modal-img" src="" class="w-full h-64 object-contain mb-4">
+                <div class="flex justify-center space-x-2 mb-4">
+                    <img src="images/mateo_llavero.jpg" onclick="swapImg('images/mateo_llavero.jpg')" class="w-16 h-16 cursor-pointer border-2 hover:border-brand-accent">
+                    <img src="images/mateo_llavero_atras.jpg" onclick="swapImg('images/mateo_llavero_atras.jpg')" class="w-16 h-16 cursor-pointer border-2 hover:border-brand-accent">
+                </div>
+                <a href="https://wa.me/541164396711?text=Hola!%20Me%20interesa%20el%20Llavero%20personalizado." target="_blank" class="block bg-brand-accent text-white py-3 rounded-xl font-bold">Comprar</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        function openModal() {
+            document.getElementById('modal').classList.add('active');
+            document.getElementById('modal-img').src = 'images/mateo_llavero.jpg';
+        }
+        function closeModal() { document.getElementById('modal').classList.remove('active'); }
+        function swapImg(src) { document.getElementById('modal-img').src = src; }
+    </script>
 
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -157,15 +176,14 @@
                 
                 <!-- Producto 1 -->
                 <div class="group relative animate-on-scroll delay-100 product-card" data-collection="vuelta-a-clases">
-                    <div class="w-full h-80 bg-gray-200 rounded-xl overflow-hidden relative">
+                    <div class="w-full h-80 bg-gray-200 rounded-xl overflow-hidden relative cursor-pointer" onclick="openModal()">
                         <!-- Imagen actualizada -->
                         <img src="images/mateo_llavero.jpg" alt="Llavero personalizado de la selección" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         <span class="absolute top-3 left-3 bg-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide text-gray-900">Nuevo</span>
                     </div>
                     <div class="mt-4 flex justify-between items-start">
                         <div>
-                            <!-- Link de WhatsApp -->
-                            <h3 class="text-lg font-medium text-gray-900"><a href="https://wa.me/541164396711?text=Hola!%20Me%20interesa%20el%20producto:%20Llavero%20personalizado%20de%20la%20selección." target="_blank" rel="noopener noreferrer"><span aria-hidden="true" class="absolute inset-0"></span>Llavero personalizado de la selección</a></h3>
+                            <h3 class="text-lg font-medium text-gray-900 cursor-pointer" onclick="openModal()">Llavero personalizado de la selección</h3>
                             <p class="mt-1 text-sm text-gray-500">Edición especial</p>
                         </div>
                         <p class="text-lg font-bold text-brand-accent">$12.00</p>

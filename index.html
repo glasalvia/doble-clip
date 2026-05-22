@@ -44,6 +44,7 @@
         /* Modal */
         #modal { display: none; }
         #modal.active { display: flex; }
+        #modal-img { transition: opacity 0.3s ease-in-out; }
     </style>
 </head>
 <body class="text-brand-dark antialiased">
@@ -54,20 +55,30 @@
             <div id="modal-content" class="text-center">
                 <img id="modal-img" src="" class="w-full h-64 object-contain mb-4">
                 <div class="flex justify-center space-x-2 mb-4">
-                    <img src="images/mateo_llavero.jpg" onclick="swapImg('images/mateo_llavero.jpg')" class="w-16 h-16 cursor-pointer border-2 hover:border-brand-accent">
-                    <img src="images/mateo_llavero_atras.jpg" onclick="swapImg('images/mateo_llavero_atras.jpg')" class="w-16 h-16 cursor-pointer border-2 hover:border-brand-accent">
+                    <img src="images/mateo_llavero.jpg" onclick="swapImg('images/mateo_llavero.jpg')" class="w-16 h-16 cursor-pointer border-2 hover:border-brand-accent transition-transform hover:scale-110">
+                    <img src="images/mateo_llavero_atras.jpg" onclick="swapImg('images/mateo_llavero_atras.jpg')" class="w-16 h-16 cursor-pointer border-2 hover:border-brand-accent transition-transform hover:scale-110">
                 </div>
-                <a href="https://wa.me/541164396711?text=Hola!%20Me%20interesa%20el%20Llavero%20personalizado." target="_blank" class="block bg-brand-accent text-white py-3 rounded-xl font-bold">Comprar</a>
+                <a href="https://wa.me/541164396711?text=Hola!%20Me%20interesa%20el%20Llavero%20personalizado." target="_blank" class="block bg-brand-accent text-white py-3 rounded-xl font-bold hover:bg-orange-600 transition">Comprar</a>
             </div>
         </div>
     </div>
     <script>
         function openModal() {
             document.getElementById('modal').classList.add('active');
-            document.getElementById('modal-img').src = 'images/mateo_llavero.jpg';
+            let img = document.getElementById('modal-img');
+            img.style.opacity = 0;
+            img.src = 'images/mateo_llavero.jpg';
+            setTimeout(() => { img.style.opacity = 1; }, 50);
         }
         function closeModal() { document.getElementById('modal').classList.remove('active'); }
-        function swapImg(src) { document.getElementById('modal-img').src = src; }
+        function swapImg(src) {
+            let img = document.getElementById('modal-img');
+            img.style.opacity = 0;
+            setTimeout(() => {
+                img.src = src;
+                img.style.opacity = 1;
+            }, 300);
+        }
     </script>
 
     <header class="bg-white shadow-sm sticky top-0 z-50">

@@ -48,26 +48,38 @@
     </style>
 </head>
 <body class="text-brand-dark antialiased">
-    <!-- Modal -->
-    <div id="modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4" onclick="if(event.target==this)closeModal()">
+        <div id="modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4" onclick="if(event.target==this)closeModal()">
         <div class="bg-white rounded-2xl p-6 max-w-lg w-full relative">
             <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-black">✕</button>
             <div id="modal-content" class="text-center">
                 <img id="modal-img" src="" class="w-full h-64 object-contain mb-4">
-                <div class="flex justify-center space-x-2 mb-4">
-                    <img src="images/mateo_llavero.jpg" onclick="swapImg('images/mateo_llavero.jpg')" class="w-16 h-16 cursor-pointer border-2 hover:border-brand-accent transition-transform hover:scale-110">
-                    <img src="images/mateo_llavero_atras.jpg" onclick="swapImg('images/mateo_llavero_atras.jpg')" class="w-16 h-16 cursor-pointer border-2 hover:border-brand-accent transition-transform hover:scale-110">
+                <div id="modal-thumbnails" class="flex justify-center space-x-2 mb-4">
+                    <!-- Thumbnails will be injected dynamically -->
                 </div>
-                <a href="https://wa.me/541164396711?text=Hola!%20Me%20interesa%20el%20Llavero%20personalizado." target="_blank" class="block bg-brand-accent text-white py-3 rounded-xl font-bold hover:bg-orange-600 transition">Comprar</a>
+                <a id="modal-buy-btn" href="#" target="_blank" class="block bg-brand-accent text-white py-3 rounded-xl font-bold hover:bg-orange-600 transition">Comprar</a>
             </div>
         </div>
     </div>
     <script>
-        function openModal() {
+        function openModal(title, images, buyUrl) {
             document.getElementById('modal').classList.add('active');
             let img = document.getElementById('modal-img');
+            let thumbnailsContainer = document.getElementById('modal-thumbnails');
+            let buyBtn = document.getElementById('modal-buy-btn');
+            
+            thumbnailsContainer.innerHTML = '';
+            img.src = images[0];
+            buyBtn.href = buyUrl;
+
+            images.forEach(src => {
+                let thumb = document.createElement('img');
+                thumb.src = src;
+                thumb.className = 'w-16 h-16 cursor-pointer border-2 hover:border-brand-accent transition-transform hover:scale-110';
+                thumb.onclick = () => swapImg(src);
+                thumbnailsContainer.appendChild(thumb);
+            });
+            
             img.style.opacity = 0;
-            img.src = 'images/mateo_llavero.jpg';
             setTimeout(() => { img.style.opacity = 1; }, 50);
         }
         function closeModal() { document.getElementById('modal').classList.remove('active'); }
@@ -185,7 +197,7 @@
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 
-                <!-- Producto 1 -->
+                <!-- Producto 1 - Llavero Personalizado-->
                 <div class="group relative animate-on-scroll delay-100 product-card" data-collection="vuelta-a-clases">
                     <div class="w-full h-80 bg-gray-200 rounded-xl overflow-hidden relative cursor-pointer" onclick="openModal('Llavero personalizado de la selección', ['images/mateo_llavero.jpg', 'images/mateo_llavero_atras.jpg'], 'https://wa.me/541164396711?text=Hola!%20Me%20interesa%20el%20Llavero%20personalizado.')">
                         <img src="images/mateo_llavero.jpg" alt="Llavero personalizado de la selección" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
@@ -202,28 +214,13 @@
 
                 <!-- Nuevo Producto: Ficha de matemática -->
                 <div class="group relative animate-on-scroll delay-200 product-card" data-collection="vuelta-a-clases">
-                    <div class="w-full h-80 bg-gray-200 rounded-xl overflow-hidden relative cursor-pointer" onclick="openModal('Ficha de matemática', ['images/multiplicacion_pro.jpg', 'images/division_pro.jpg'], 'https://wa.me/541164396711?text=Hola!%20Me%20interesa%20la%20Ficha%20de%20matemática')">
-                        <img src="images/multiplicacion_pro.jpg" alt="Ficha de matemática" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="w-full h-80 bg-gray-200 rounded-xl overflow-hidden relative cursor-pointer" onclick="openModal('Ficha de matemática', ['images/multiplicacion_editada.jpeg', 'images/divisiòn_editada.jpeg'], 'https://wa.me/541164396711?text=Hola!%20Me%20interesa%20la%20Ficha%20de%20matemática')">
+                        <img src="images/multiplicacion_editada.jpeg" alt="Ficha de matemática" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         <span class="absolute top-3 left-3 bg-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide text-gray-900">Combo</span>
                     </div>
                     <div class="mt-4 flex justify-between items-start">
                         <div>
-                            <h3 class="text-lg font-medium text-gray-900 cursor-pointer" onclick="openModal('Ficha de matemática', ['images/multiplicacion_pro.jpg', 'images/division_pro.jpg'], 'https://wa.me/541164396711?text=Hola!%20Me%20interesa%20la%20Ficha%20de%20matemática')">Ficha de matemática - Multiplicación y división</h3>
-                            <p class="mt-1 text-sm text-gray-500">Material didáctico</p>
-                        </div>
-                        <p class="text-lg font-bold text-brand-accent">$5000</p>
-                    </div>
-                </div>
-
-                <!-- Producto Ficha -->
-                <div class="group relative animate-on-scroll delay-200 product-card" data-collection="vuelta-a-clases">
-                    <div class="w-full h-80 bg-gray-200 rounded-xl overflow-hidden relative cursor-pointer" onclick="openModal('Ficha de matemática', ['images/multiplicacion_pro.jpg', 'images/division_pro.jpg'], 'https://wa.me/541164396711?text=Hola!%20Me%20interesa%20la%20Ficha.')">
-                        <img src="images/multiplicacion_pro.jpg" alt="Ficha de matemática" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        <span class="absolute top-3 left-3 bg-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide text-gray-900">Combo</span>
-                    </div>
-                    <div class="mt-4 flex justify-between items-start">
-                        <div>
-                            <h3 class="text-lg font-medium text-gray-900 cursor-pointer" onclick="openModal('Ficha de matemática', ['images/multiplicacion_pro.jpg', 'images/division_pro.jpg'], 'https://wa.me/541164396711?text=Hola!%20Me%20interesa%20la%20Ficha.')">Ficha de matemática - Multiplicación y división</h3>
+                            <h3 class="text-lg font-medium text-gray-900 cursor-pointer" onclick="openModal('Ficha de matemática', ['images/multiplicacion_editada.jpeg', 'images/division_editada.jpeg'], 'https://wa.me/541164396711?text=Hola!%20Me%20interesa%20la%20Ficha%20de%20matemática')">Ficha de matemática - Multiplicación y división</h3>
                             <p class="mt-1 text-sm text-gray-500">Material didáctico</p>
                         </div>
                         <p class="text-lg font-bold text-brand-accent">$5000</p>

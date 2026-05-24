@@ -49,24 +49,32 @@
 </head>
 <body class="text-brand-dark antialiased">
         <div id="modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4" onclick="if(event.target==this)closeModal()">
-        <div class="bg-white rounded-2xl p-6 max-w-lg w-full relative">
+            <div class="bg-white rounded-2xl p-6 max-w-lg w-full relative">
             <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-black">✕</button>
             <div id="modal-content" class="text-center">
                 <img id="modal-img" src="" class="w-full h-64 object-contain mb-4">
+                <h3 id="modal-title" class="text-xl font-bold text-gray-900 mb-2"></h3>
+                <p id="modal-desc" class="text-gray-600 mb-4 px-2"></p>
+<h3 id="modal-title" class="text-xl font-bold text-gray-900 mb-2"></h3>
+                <p id="modal-desc" class="text-gray-600 mb-4 px-2"></p>
                 <div id="modal-thumbnails" class="flex justify-center space-x-2 mb-4">
-                    <!-- Thumbnails will be injected dynamically -->
+                    <!-- Thumbnails -->
                 </div>
                 <a id="modal-buy-btn" href="#" target="_blank" class="block bg-brand-accent text-white py-3 rounded-xl font-bold hover:bg-orange-600 transition">Comprar</a>
             </div>
         </div>
     </div>
     <script>
-        function openModal(title, images, buyUrl) {
+        function openModal(title, images, buyUrl, description) {
             document.getElementById('modal').classList.add('active');
             let img = document.getElementById('modal-img');
+            let titleEl = document.getElementById('modal-title');
+            let descEl = document.getElementById('modal-desc');
             let thumbnailsContainer = document.getElementById('modal-thumbnails');
             let buyBtn = document.getElementById('modal-buy-btn');
             
+            titleEl.textContent = title;
+            descEl.textContent = description;
             thumbnailsContainer.innerHTML = '';
             img.src = images[0];
             buyBtn.href = buyUrl;
@@ -92,6 +100,7 @@
             }, 300);
         }
     </script>
+
 
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -199,13 +208,13 @@
                 
                 <!-- Producto 1 - Llavero Personalizado-->
                 <div class="group relative animate-on-scroll delay-100 product-card" data-collection="vuelta-a-clases">
-                    <div class="w-full h-80 bg-gray-200 rounded-xl overflow-hidden relative cursor-pointer" onclick="openModal('Llavero personalizado de la selección', ['images/mateo_llavero.jpg', 'images/mateo_llavero_atras.jpg'], 'https://wa.me/541164396711?text=Hola!%20Me%20interesa%20el%20Llavero%20personalizado.')">
+                    <div class="w-full h-80 bg-gray-200 rounded-xl overflow-hidden relative cursor-pointer" onclick="openModal('Llavero personalizado de la selección', ['images/mateo_llavero.jpg', 'images/mateo_llavero_atras.jpg'], 'https://wa.me/541164396711?text=Hola!%20Me%20interesa%20el%20Llavero%20personalizado.', 'Llavero acrílico personalizado con tu nombre o nombre de tu fan favorito. Resistente y lleno de magia mundialista.')">
                         <img src="images/mateo_llavero.jpg" alt="Llavero personalizado de la selección" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         <span class="absolute top-3 left-3 bg-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide text-gray-900">Nuevo</span>
                     </div>
                     <div class="mt-4 flex justify-between items-start">
                         <div>
-                            <h3 class="text-lg font-medium text-gray-900 cursor-pointer" onclick="openModal('Llavero personalizado de la selección', ['images/mateo_llavero.jpg', 'images/mateo_llavero_atras.jpg'], 'https://wa.me/541164396711?text=Hola!%20Me%20interesa%20el%20Llavero%20personalizado.')">Llavero personalizado de la selección</h3>
+                            <h3 class="text-lg font-medium text-gray-900 cursor-pointer" onclick="openModal('Llavero personalizado de la selección', ['images/mateo_llavero.jpg', 'images/mateo_llavero_atras.jpg'], 'https://wa.me/541164396711?text=Hola!%20Me%20interesa%20el%20Llavero%20personalizado.', 'Llavero acrílico personalizado con tu nombre o nombre de tu fan favorito. Resistente y lleno de magia mundialista.')">Llavero personalizado de la selección</h3>
                             <p class="mt-1 text-sm text-gray-500">Edición especial</p>
                         </div>
                         <p class="text-lg font-bold text-brand-accent">$5000</p>
@@ -214,12 +223,12 @@
 
                 <!-- Producto 3 - Llavero figurita de la selección -->
                 <div class="group relative animate-on-scroll delay-200 product-card" data-collection="vuelta-a-clases">
-                    <div class="w-full h-80 bg-gray-200 rounded-xl overflow-hidden relative cursor-pointer" onclick="openModal('Llavero figurita de la selección', ['images/llavero_messi.jpeg', 'images/mateo_llavero_atras.jpg'], 'https://wa.me/541164396711?text=Hola!%20Me%20interesa%20el%20Llavero%20figurita%20de%20la%20selección.')">
+                    <div class="w-full h-80 bg-gray-200 rounded-xl overflow-hidden relative cursor-pointer" onclick="openModal('Llavero figurita de la selección', ['images/llavero_messi.jpeg', 'images/mateo_llavero_atras.jpg'], 'https://wa.me/541164396711?text=Hola!%20Me%20interesa%20el%20Llavero%20figurita%20de%20la%20selección.', 'Lleva la pasión en tus llaves con nuestro llavero exclusivo con diseño de figurita. Un detalle épico para cualquier hincha.')">
                         <img src="images/llavero_messi.jpeg" alt="Llavero figurita de la selección" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                     </div>
                     <div class="mt-4 flex justify-between items-start">
                         <div>
-                            <h3 class="text-lg font-medium text-gray-900 cursor-pointer" onclick="openModal('Llavero figurita de la selección', ['images/llavero_messi.jpeg', 'images/mateo_llavero_atras.jpg'], 'https://wa.me/541164396711?text=Hola!%20Me%20interesa%20el%20Llavero%20figurita%20de%20la%20selección.')">Llavero figurita de la selección</h3>
+                            <h3 class="text-lg font-medium text-gray-900 cursor-pointer" onclick="openModal('Llavero figurita de la selección', ['images/llavero_messi.jpeg', 'images/mateo_llavero_atras.jpg'], 'https://wa.me/541164396711?text=Hola!%20Me%20interesa%20el%20Llavero%20figurita%20de%20la%20selección.', 'Lleva la pasión en tus llaves con nuestro llavero exclusivo con diseño de figurita. Un detalle épico para cualquier hincha.')">Llavero figurita de la selección</h3>
                             <p class="mt-1 text-sm text-gray-500">Merchandising oficial</p>
                         </div>
                         <p class="text-lg font-bold text-brand-accent">$5000</p>
@@ -228,13 +237,13 @@
 
                 <!-- Nuevo Producto: Ficha de matemática -->
                 <div class="group relative animate-on-scroll delay-300 product-card" data-collection="vuelta-a-clases">
-                    <div class="w-full h-80 bg-gray-200 rounded-xl overflow-hidden relative cursor-pointer" onclick="openModal('Ficha de matemática', ['images/multiplicacion_editada.jpeg', 'images/division_editada.jpeg'], 'https://wa.me/541164396711?text=Hola!%20Me%20interesa%20la%20Ficha%20de%20matemática')">
+                    <div class="w-full h-80 bg-gray-200 rounded-xl overflow-hidden relative cursor-pointer" onclick="openModal('Ficha de matemática', ['images/multiplicacion_editada.jpeg', 'images/division_editada.jpeg'], 'https://wa.me/541164396711?text=Hola!%20Me%20interesa%20la%20Ficha%20de%20matemática', 'Fichas educativas diseñadas para facilitar las tablas de multiplicar y divisiones. La mejor forma de aprender jugando.')">
                         <img src="images/multiplicacion_editada.jpeg" alt="Ficha de matemática" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         <span class="absolute top-3 left-3 bg-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide text-gray-900">Combo</span>
                     </div>
                     <div class="mt-4 flex justify-between items-start">
                         <div>
-                            <h3 class="text-lg font-medium text-gray-900 cursor-pointer" onclick="openModal('Ficha de matemática', ['images/multiplicacion_editada.jpeg', 'images/division_editada.jpeg'], 'https://wa.me/541164396711?text=Hola!%20Me%20interesa%20la%20Ficha%20de%20matemática')">Ficha de matemática - Multiplicación y división</h3>
+                            <h3 class="text-lg font-medium text-gray-900 cursor-pointer" onclick="openModal('Ficha de matemática', ['images/multiplicacion_editada.jpeg', 'images/division_editada.jpeg'], 'https://wa.me/541164396711?text=Hola!%20Me%20interesa%20la%20Ficha%20de%20matemática', 'Fichas educativas diseñadas para facilitar las tablas de multiplicar y divisiones. La mejor forma de aprender jugando.')">Ficha de matemática - Multiplicación y división</h3>
                             <p class="mt-1 text-sm text-gray-500">Material didáctico</p>
                         </div>
                         <p class="text-lg font-bold text-brand-accent">$5000</p>
